@@ -7,7 +7,24 @@ const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const countEl = document.getElementById("count");
 
-/* 숫자 표시 */
+function getTodayKorea() {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).format(new Date());
+}
+
+function getDateKorea(dateValue) {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).format(new Date(dateValue));
+}
+
 function updateCountDisplay(value) {
   countEl.textContent = value;
 
@@ -18,25 +35,44 @@ function updateCountDisplay(value) {
   }
 }
 
-/* 최초 카운트 불러오기 */
-async function loadCount() {
+async function autoResetIfNewDay() {
   const { data, error } = await db
     .from("counters")
-    .select("value")
+    .select("value, updated_at")
     .eq("id", 1)
     .single();
 
   if (error) {
-    alert("카운트 불러오기 실패");
     console.error(error);
+    return;
+  }
+
+  const today = getTodayKorea();
+  const lastUpdatedDate = getDateKorea(data.updated_at);
+
+  if (today !== lastUpdatedDate && data.value !== 0) {
+    const { data: resetData, error: resetError } =
+      await db.rpc("reset_counter");
+
+    if (resetError) {
+      console.error(resetError);
+      return;
+    }
+
+    updateCountDisplay(resetData);
     return;
   }
 
   updateCountDisplay(data.value);
 }
 
-/* 카운트 변경 */
+async function loadCount() {
+  await autoResetIfNewDay();
+}
+
 async function changeCount(amount, action) {
+  await autoResetIfNewDay();
+
   const { data, error } = await db.rpc("change_counter", {
     p_amount: amount,
     p_action: action
@@ -51,7 +87,6 @@ async function changeCount(amount, action) {
   updateCountDisplay(data);
 }
 
-/* 리셋 */
 async function resetCount() {
   const ok = confirm("정말 리셋하시겠습니까?");
   if (!ok) return;
@@ -67,7 +102,6 @@ async function resetCount() {
   updateCountDisplay(data);
 }
 
-/* 실시간 동기화 */
 db.channel("counter-realtime")
   .on(
     "postgres_changes",
@@ -82,7 +116,6 @@ db.channel("counter-realtime")
   )
   .subscribe();
 
-/* 엑셀 다운로드 */
 async function downloadCSV() {
   const { data, error } = await db
     .from("counter_logs")
@@ -183,5 +216,8 @@ async function downloadCSV() {
   URL.revokeObjectURL(url);
 }
 
-/* 시작 */
 loadCount();
+
+setInterval(() => {
+  autoResetIfNewDay();
+}, 60000);
