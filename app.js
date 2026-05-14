@@ -119,7 +119,7 @@ db.channel("counter-realtime")
 async function downloadCSV() {
   const { data, error } = await db
     .from("counter_logs")
-    .select("log_date, hour_label, action")
+    .select("log_date, hour_label, action, before_value")
     .order("log_date", { ascending: true })
     .order("hour_label", { ascending: true });
 
@@ -147,7 +147,9 @@ async function downloadCSV() {
         minus2: 0,
         minus3: 0,
         minus4: 0,
-        minus5: 0
+        minus5: 0,
+        resetCount: 0,
+        resetBeforeTotal: 0
       };
     }
 
@@ -162,6 +164,11 @@ async function downloadCSV() {
     if (row.action === "차감3") grouped[key].minus3 += 1;
     if (row.action === "차감4") grouped[key].minus4 += 1;
     if (row.action === "차감5") grouped[key].minus5 += 1;
+
+    if (row.action === "리셋") {
+      grouped[key].resetCount += 1;
+      grouped[key].resetBeforeTotal += Number(row.before_value || 0);
+    }
   });
 
   const header = [
@@ -176,7 +183,9 @@ async function downloadCSV() {
     "차감2",
     "차감3",
     "차감4",
-    "차감5"
+    "차감5",
+    "리셋횟수",
+    "리셋전카운트"
   ];
 
   const rows = Object.values(grouped).map((row) => [
@@ -191,7 +200,9 @@ async function downloadCSV() {
     row.minus2,
     row.minus3,
     row.minus4,
-    row.minus5
+    row.minus5,
+    row.resetCount,
+    row.resetBeforeTotal
   ]);
 
   const csv = [header, ...rows]
