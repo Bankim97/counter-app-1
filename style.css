@@ -1,0 +1,118 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+}
+
+.wrap {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 24px;
+  padding: 24px 16px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 32px;
+}
+
+.count {
+  width: 280px;
+  height: 160px;
+
+  background: white;
+  border-radius: 24px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 72px;
+  font-weight: 900;
+  color: #111827;
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+
+  transition: 0.2s;
+}
+
+.danger {
+  color: #dc2626;
+}
+
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 100px);
+  gap: 12px;
+}
+
+button {
+  height: 54px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: #2563eb;
+  color: white;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+.minus {
+  background: #dc2626;
+}
+
+.reset {
+  width: 548px;
+  background: #111827;
+}
+
+.excel {
+  width: 548px;
+  background: #059669;
+}
+
+/* 모바일 */
+@media (max-width: 650px) {
+  h1 {
+    font-size: 26px;
+  }
+
+  .count {
+    width: 240px;
+    height: 140px;
+    font-size: 58px;
+  }
+
+  .button-grid {
+    grid-template-columns: repeat(2, 120px);
+  }
+
+  button {
+    height: 50px;
+  }
+
+  .reset,
+  .excel {
+    width: 252px;
+  }
+}
