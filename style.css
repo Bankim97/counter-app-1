@@ -63,7 +63,7 @@ button {
   border: none;
   border-radius: 14px;
 
-  background: #2563eb;
+  background: #111827;
   color: white;
 
   font-size: 16px;
@@ -78,7 +78,7 @@ button:hover {
 }
 
 .minus {
-  background: #dc2626;
+  background: #111827;
 }
 
 .reset {

@@ -11,27 +11,27 @@
 
 <body>
   <main class="wrap">
-    <h1>실시간 카운터</h1>
+    <h1>Counter</h1>
 
     <div id="count" class="count">0</div>
 
     <section class="button-grid">
-      <button onclick="changeCount(1, '인원1')">인원1</button>
-      <button onclick="changeCount(2, '인원2')">인원2</button>
-      <button onclick="changeCount(3, '인원3')">인원3</button>
-      <button onclick="changeCount(4, '인원4')">인원4</button>
-      <button onclick="changeCount(5, '인원5')">인원5</button>
+      <button onclick="changeCount(1, '인원1')">+ 1</button>
+      <button onclick="changeCount(2, '인원2')">+ 2</button>
+      <button onclick="changeCount(3, '인원3')">+ 3</button>
+      <button onclick="changeCount(4, '인원4')">+ 4</button>
+      <button onclick="changeCount(5, '인원5')">+ 5</button>
 
-      <button class="minus" onclick="changeCount(-1, '차감1')">차감1</button>
-      <button class="minus" onclick="changeCount(-2, '차감2')">차감2</button>
-      <button class="minus" onclick="changeCount(-3, '차감3')">차감3</button>
-      <button class="minus" onclick="changeCount(-4, '차감4')">차감4</button>
-      <button class="minus" onclick="changeCount(-5, '차감5')">차감5</button>
+      <button class="minus" onclick="changeCount(-1, '차감1')">- 1</button>
+      <button class="minus" onclick="changeCount(-2, '차감2')">- 2</button>
+      <button class="minus" onclick="changeCount(-3, '차감3')">- 3</button>
+      <button class="minus" onclick="changeCount(-4, '차감4')">- 4</button>
+      <button class="minus" onclick="changeCount(-5, '차감5')">- 5</button>
     </section>
 
-    <button class="reset" onclick="resetCount()">리셋</button>
+    <button class="reset" onclick="resetCount()">Reset</button>
 
-    <button class="excel" onclick="downloadCSV()">엑셀 다운로드</button>
+    <button class="excel" onclick="downloadCSV()">Excel Dounload</button>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
