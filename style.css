@@ -63,7 +63,6 @@ button {
   border: none;
   border-radius: 14px;
 
-  background: #111827;
   color: white;
 
   font-size: 16px;
@@ -77,15 +76,23 @@ button:hover {
   opacity: 0.85;
 }
 
-.minus {
-  background: #111827;
+/* 증가 버튼 */
+.plus {
+  background: #2563eb;
 }
 
+/* 차감 버튼 */
+.minus {
+  background: #dc2626;
+}
+
+/* 리셋 버튼 */
 .reset {
   width: 548px;
   background: #111827;
 }
 
+/* 엑셀 버튼 */
 .excel {
   width: 548px;
   background: #059669;
