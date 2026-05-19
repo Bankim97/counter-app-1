@@ -24,15 +24,11 @@ body {
   padding: 24px 16px;
 }
 
-/* 제목 */
+/* 로고 */
 
-h1 {
-  margin: 0;
-
-  font-size: 32px;
-  font-weight: 900;
-
-  color: white;
+.logo {
+  width: 320px;
+  object-fit: contain;
 }
 
 /* 카운트 */
@@ -49,7 +45,7 @@ h1 {
   justify-content: center;
   align-items: center;
 
-  font-size: 72px;
+  font-size: 75px;
   font-weight: 900;
 
   color: white;
@@ -82,7 +78,7 @@ h1 {
   gap: 12px;
 }
 
-/* 기본 버튼 */
+/* 버튼 */
 
 button {
   height: 54px;
@@ -140,15 +136,15 @@ button:hover {
 
 @media (max-width: 650px) {
 
-  h1 {
-    font-size: 28px;
+  .logo {
+    width: 240px;
   }
 
   .count {
     width: 240px;
     height: 140px;
 
-    font-size: 63px;
+    font-size: 61px;
   }
 
   .button-row {
