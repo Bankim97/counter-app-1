@@ -2,7 +2,7 @@ const SUPABASE_URL =
   "https://pvhhcydrydjaxtpquvjj.supabase.co";
 
 const SUPABASE_ANON_KEY =
-  "여기에_app1_키";
+  "sb_publishable_tWUYMtiFo6OzDhgNFaCy3Q_rr0o08Rn";
 
 const db = supabase.createClient(
   SUPABASE_URL,
