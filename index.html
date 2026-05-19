@@ -8,7 +8,38 @@
     content="width=device-width, initial-scale=1.0"
   />
 
-  <title>실시간 카운터</title>
+  <meta
+    name="theme-color"
+    content="#000000"
+  />
+
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  />
+
+  <meta
+    name="mobile-web-app-capable"
+    content="yes"
+  />
+
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  />
+
+  <title>AVECS</title>
+
+  <!-- 아이콘 -->
+  <link
+    rel="apple-touch-icon"
+    href="./A.png"
+  />
+
+  <link
+    rel="icon"
+    href="./A.png"
+  />
 
   <link
     rel="stylesheet"
@@ -17,18 +48,13 @@
 </head>
 
 <body>
-
   <main class="wrap">
-
-    <!-- 로고 -->
 
     <img
       src="./AVECS Logo.png"
       alt="AVECS"
       class="logo"
     />
-
-    <!-- 카운트 -->
 
     <div
       id="count"
@@ -37,11 +63,7 @@
       0
     </div>
 
-    <!-- 버튼 그룹 -->
-
     <section class="button-group">
-
-      <!-- 증가 -->
 
       <div class="button-row">
 
@@ -81,8 +103,6 @@
         </button>
 
       </div>
-
-      <!-- 감소 -->
 
       <div class="button-row">
 
@@ -125,16 +145,12 @@
 
     </section>
 
-    <!-- 리셋 -->
-
     <button
       class="reset"
       onclick="resetCount()"
     >
       Reset
     </button>
-
-    <!-- 엑셀 -->
 
     <button
       class="excel"
@@ -148,6 +164,5 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script src="./app.js"></script>
-
 </body>
 </html>
