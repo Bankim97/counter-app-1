@@ -51,7 +51,17 @@ h1 {
   color: #dc2626;
 }
 
-.button-grid {
+/* 버튼 그룹 */
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* 버튼 한 줄 */
+
+.button-row {
   display: grid;
   grid-template-columns: repeat(5, 100px);
   gap: 12px;
@@ -65,7 +75,7 @@ button {
 
   color: white;
 
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
 
   cursor: pointer;
@@ -73,33 +83,39 @@ button {
 }
 
 button:hover {
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
-/* 증가 버튼 */
+/* 증가 */
+
 .plus {
   background: #2563eb;
 }
 
-/* 차감 버튼 */
+/* 감소 */
+
 .minus {
   background: #dc2626;
 }
 
-/* 리셋 버튼 */
+/* 리셋 */
+
 .reset {
   width: 548px;
   background: #111827;
 }
 
-/* 엑셀 버튼 */
+/* 엑셀 */
+
 .excel {
   width: 548px;
   background: #059669;
 }
 
 /* 모바일 */
+
 @media (max-width: 650px) {
+
   h1 {
     font-size: 26px;
   }
@@ -110,16 +126,18 @@ button:hover {
     font-size: 58px;
   }
 
-  .button-grid {
-    grid-template-columns: repeat(2, 120px);
+  .button-row {
+    grid-template-columns: repeat(5, 58px);
+    gap: 8px;
   }
 
   button {
-    height: 50px;
+    height: 54px;
+    font-size: 18px;
   }
 
   .reset,
   .excel {
-    width: 252px;
+    width: 322px;
   }
 }

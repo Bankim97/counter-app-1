@@ -2,39 +2,144 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
   <title>실시간 카운터</title>
 
-  <link rel="stylesheet" href="./style.css" />
+  <link
+    rel="stylesheet"
+    href="./style.css"
+  />
 </head>
 
 <body>
+
   <main class="wrap">
+
     <h1>Counter</h1>
 
-    <div id="count" class="count">0</div>
+    <div
+      id="count"
+      class="count"
+    >
+      0
+    </div>
 
-    <section class="button-grid">
-      <button class="plus" onclick="changeCount(1, '인원1')">+ 1</button>
-      <button class="plus" onclick="changeCount(2, '인원2')">+ 2</button>
-      <button class="plus" onclick="changeCount(3, '인원3')">+ 3</button>
-      <button class="plus" onclick="changeCount(4, '인원4')">+ 4</button>
-      <button class="plus" onclick="changeCount(5, '인원5')">+ 5</button>
+    <!-- 버튼 그룹 -->
 
-      <button class="minus" onclick="changeCount(-1, '차감1')">- 1</button>
-      <button class="minus" onclick="changeCount(-2, '차감2')">- 2</button>
-      <button class="minus" onclick="changeCount(-3, '차감3')">- 3</button>
-      <button class="minus" onclick="changeCount(-4, '차감4')">- 4</button>
-      <button class="minus" onclick="changeCount(-5, '차감5')">- 5</button>
+    <section class="button-group">
+
+      <!-- 증가 -->
+
+      <div class="button-row">
+
+        <button
+          class="plus"
+          onclick="changeCount(1, '인원1')"
+        >
+          +1
+        </button>
+
+        <button
+          class="plus"
+          onclick="changeCount(2, '인원2')"
+        >
+          +2
+        </button>
+
+        <button
+          class="plus"
+          onclick="changeCount(3, '인원3')"
+        >
+          +3
+        </button>
+
+        <button
+          class="plus"
+          onclick="changeCount(4, '인원4')"
+        >
+          +4
+        </button>
+
+        <button
+          class="plus"
+          onclick="changeCount(5, '인원5')"
+        >
+          +5
+        </button>
+
+      </div>
+
+      <!-- 감소 -->
+
+      <div class="button-row">
+
+        <button
+          class="minus"
+          onclick="changeCount(-1, '차감1')"
+        >
+          -1
+        </button>
+
+        <button
+          class="minus"
+          onclick="changeCount(-2, '차감2')"
+        >
+          -2
+        </button>
+
+        <button
+          class="minus"
+          onclick="changeCount(-3, '차감3')"
+        >
+          -3
+        </button>
+
+        <button
+          class="minus"
+          onclick="changeCount(-4, '차감4')"
+        >
+          -4
+        </button>
+
+        <button
+          class="minus"
+          onclick="changeCount(-5, '차감5')"
+        >
+          -5
+        </button>
+
+      </div>
+
     </section>
 
-    <button class="reset" onclick="resetCount()">Reset</button>
+    <!-- 리셋 -->
 
-    <button class="excel" onclick="downloadCSV()">Excel Download</button>
+    <button
+      class="reset"
+      onclick="resetCount()"
+    >
+      Reset
+    </button>
+
+    <!-- 엑셀 -->
+
+    <button
+      class="excel"
+      onclick="downloadCSV()"
+    >
+      Excel Download
+    </button>
+
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script src="./app.js"></script>
+
 </body>
 </html>
