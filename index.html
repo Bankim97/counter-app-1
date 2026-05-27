@@ -5,46 +5,19 @@
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
   />
 
-  <meta
-    name="theme-color"
-    content="#000000"
-  />
-
-  <meta
-    name="apple-mobile-web-app-capable"
-    content="yes"
-  />
-
-  <meta
-    name="mobile-web-app-capable"
-    content="yes"
-  />
-
-  <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black-translucent"
-  />
+  <meta name="theme-color" content="#000000" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
   <title>AVECS</title>
 
-  <!-- 아이콘 -->
-  <link
-    rel="apple-touch-icon"
-    href="./A.png"
-  />
-
-  <link
-    rel="icon"
-    href="./A.png"
-  />
-
-  <link
-    rel="stylesheet"
-    href="./style.css"
-  />
+  <link rel="apple-touch-icon" href="./A.png" />
+  <link rel="icon" href="./A.png" />
+  <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body>
@@ -66,81 +39,19 @@
     <section class="button-group">
 
       <div class="button-row">
-
-        <button
-          class="plus"
-          onclick="changeCount(1, '인원1')"
-        >
-          +1
-        </button>
-
-        <button
-          class="plus"
-          onclick="changeCount(2, '인원2')"
-        >
-          +2
-        </button>
-
-        <button
-          class="plus"
-          onclick="changeCount(3, '인원3')"
-        >
-          +3
-        </button>
-
-        <button
-          class="plus"
-          onclick="changeCount(4, '인원4')"
-        >
-          +4
-        </button>
-
-        <button
-          class="plus"
-          onclick="changeCount(5, '인원5')"
-        >
-          +5
-        </button>
-
+        <button class="plus" onclick="changeCount(1, '인원1')">+1</button>
+        <button class="plus" onclick="changeCount(2, '인원2')">+2</button>
+        <button class="plus" onclick="changeCount(3, '인원3')">+3</button>
+        <button class="plus" onclick="changeCount(4, '인원4')">+4</button>
+        <button class="plus" onclick="changeCount(5, '인원5')">+5</button>
       </div>
 
       <div class="button-row">
-
-        <button
-          class="minus"
-          onclick="changeCount(-1, '차감1')"
-        >
-          -1
-        </button>
-
-        <button
-          class="minus"
-          onclick="changeCount(-2, '차감2')"
-        >
-          -2
-        </button>
-
-        <button
-          class="minus"
-          onclick="changeCount(-3, '차감3')"
-        >
-          -3
-        </button>
-
-        <button
-          class="minus"
-          onclick="changeCount(-4, '차감4')"
-        >
-          -4
-        </button>
-
-        <button
-          class="minus"
-          onclick="changeCount(-5, '차감5')"
-        >
-          -5
-        </button>
-
+        <button class="minus" onclick="changeCount(-1, '차감1')">-1</button>
+        <button class="minus" onclick="changeCount(-2, '차감2')">-2</button>
+        <button class="minus" onclick="changeCount(-3, '차감3')">-3</button>
+        <button class="minus" onclick="changeCount(-4, '차감4')">-4</button>
+        <button class="minus" onclick="changeCount(-5, '차감5')">-5</button>
       </div>
 
     </section>
@@ -162,7 +73,6 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <script src="./app.js"></script>
+  <script src="./app.js?v=5"></script>
 </body>
 </html>

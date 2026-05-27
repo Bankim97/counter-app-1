@@ -2,13 +2,17 @@
   box-sizing: border-box;
 }
 
+html,
+body {
+  touch-action: manipulation;
+}
+
 body {
   margin: 0;
   padding: 0;
-
   font-family: Arial, sans-serif;
-
   background: #000000;
+  overflow-x: hidden;
 }
 
 .wrap {
@@ -24,22 +28,16 @@ body {
   padding: 24px 16px;
 }
 
-/* 로고 */
-
 .logo {
   width: 320px;
   object-fit: contain;
 }
-
-/* 카운트 */
 
 .count {
   width: 280px;
   height: 160px;
 
   background: transparent;
-
-  border-radius: 24px;
 
   display: flex;
   justify-content: center;
@@ -53,32 +51,21 @@ body {
   transition: 0.2s;
 }
 
-/* 50 이상 */
-
 .danger {
   color: #ff3b3b;
 }
 
-/* 버튼 그룹 */
-
 .button-group {
   display: flex;
   flex-direction: column;
-
   gap: 14px;
 }
 
-/* 버튼 한 줄 */
-
 .button-row {
   display: grid;
-
   grid-template-columns: repeat(5, 100px);
-
   gap: 12px;
 }
-
-/* 버튼 */
 
 button {
   height: 54px;
@@ -90,52 +77,39 @@ button {
   font-weight: bold;
 
   cursor: pointer;
-
   transition: 0.2s;
-}
 
-/* hover */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
 
 button:hover {
   opacity: 0.9;
 }
-
-/* 증가 */
 
 .plus {
   background: white;
   color: black;
 }
 
-/* 감소 */
-
 .minus {
   background: white;
   color: black;
 }
 
-/* 리셋 */
-
 .reset {
   width: 548px;
-
   background: white;
   color: black;
 }
 
-/* 엑셀 */
-
 .excel {
   width: 548px;
-
   background: #10b981;
   color: white;
 }
 
-/* 모바일 */
-
 @media (max-width: 650px) {
-
   .logo {
     width: 240px;
   }
@@ -143,19 +117,16 @@ button:hover {
   .count {
     width: 240px;
     height: 140px;
-
     font-size: 61px;
   }
 
   .button-row {
     grid-template-columns: repeat(5, 58px);
-
     gap: 8px;
   }
 
   button {
     height: 54px;
-
     font-size: 18px;
   }
 
