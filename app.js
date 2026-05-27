@@ -20,31 +20,24 @@ if (!userName) {
   );
 }
 
-const countEl =
-  document.getElementById("count");
+const countEl = document.getElementById("count");
 
 function getTodayKorea() {
-  return new Intl.DateTimeFormat(
-    "en-CA",
-    {
-      timeZone: "Asia/Seoul",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit"
-    }
-  ).format(new Date());
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).format(new Date());
 }
 
 function getDateKorea(dateValue) {
-  return new Intl.DateTimeFormat(
-    "en-CA",
-    {
-      timeZone: "Asia/Seoul",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit"
-    }
-  ).format(new Date(dateValue));
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Seoul",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).format(new Date(dateValue));
 }
 
 function updateCountDisplay(value) {
@@ -57,13 +50,23 @@ function updateCountDisplay(value) {
   }
 }
 
+function resetUserName() {
+  localStorage.removeItem("counterApp1UserName");
+
+  userName = prompt("사용자 이름을 입력하세요") || "unknown";
+
+  localStorage.setItem(
+    "counterApp1UserName",
+    userName
+  );
+}
+
 async function autoResetIfNewDay() {
-  const { data, error } =
-    await db
-      .from("counters")
-      .select("value,updated_at")
-      .eq("id", 1)
-      .single();
+  const { data, error } = await db
+    .from("counters")
+    .select("value,updated_at")
+    .eq("id", 1)
+    .single();
 
   if (error) {
     console.error(error);
@@ -71,25 +74,23 @@ async function autoResetIfNewDay() {
   }
 
   const today = getTodayKorea();
+  const lastDate = getDateKorea(data.updated_at);
 
-  const lastDate =
-    getDateKorea(data.updated_at);
-
-  if (
-    today !== lastDate &&
-    data.value !== 0
-  ) {
-    const result =
-      await db.rpc("reset_counter", {
+  if (today !== lastDate) {
+    if (data.value !== 0) {
+      const result = await db.rpc("reset_counter", {
         p_user_name: userName
       });
 
-    if (result.error) {
-      console.error(result.error);
-      return;
+      if (result.error) {
+        console.error(result.error);
+        return;
+      }
+
+      updateCountDisplay(result.data);
     }
 
-    updateCountDisplay(result.data);
+    resetUserName();
 
     return;
   }
@@ -101,18 +102,14 @@ async function loadCount() {
   await autoResetIfNewDay();
 }
 
-async function changeCount(
-  amount,
-  action
-) {
+async function changeCount(amount, action) {
   await autoResetIfNewDay();
 
-  const { data, error } =
-    await db.rpc("change_counter", {
-      p_amount: amount,
-      p_action: action,
-      p_user_name: userName
-    });
+  const { data, error } = await db.rpc("change_counter", {
+    p_amount: amount,
+    p_action: action,
+    p_user_name: userName
+  });
 
   if (error) {
     alert("카운트 변경 실패");
@@ -124,9 +121,7 @@ async function changeCount(
 }
 
 async function resetCount() {
-  const password = prompt(
-    "리셋 비밀번호 4자리를 입력하세요."
-  );
+  const password = prompt("리셋 비밀번호 4자리를 입력하세요.");
 
   if (password === null) return;
 
@@ -135,16 +130,13 @@ async function resetCount() {
     return;
   }
 
-  const ok = confirm(
-    "정말 리셋하시겠습니까?"
-  );
+  const ok = confirm("정말 리셋하시겠습니까?");
 
   if (!ok) return;
 
-  const { data, error } =
-    await db.rpc("reset_counter", {
-      p_user_name: userName
-    });
+  const { data, error } = await db.rpc("reset_counter", {
+    p_user_name: userName
+  });
 
   if (error) {
     alert("리셋 실패");
@@ -164,26 +156,17 @@ db.channel("counter-app1-realtime")
       table: "counters"
     },
     (payload) => {
-      updateCountDisplay(
-        payload.new.value
-      );
+      updateCountDisplay(payload.new.value);
     }
   )
   .subscribe();
 
 async function downloadCSV() {
-  const { data, error } =
-    await db
-      .from("counter_logs")
-      .select(
-        "log_date,hour_label,user_name,action,amount,before_value"
-      )
-      .order("log_date", {
-        ascending: true
-      })
-      .order("hour_label", {
-        ascending: true
-      });
+  const { data, error } = await db
+    .from("counter_logs")
+    .select("log_date,hour_label,user_name,action,amount,before_value")
+    .order("log_date", { ascending: true })
+    .order("hour_label", { ascending: true });
 
   if (error) {
     alert("엑셀 다운로드 실패");
@@ -194,8 +177,7 @@ async function downloadCSV() {
   const grouped = {};
 
   data.forEach((row) => {
-    const key =
-      `${row.log_date}|${row.hour_label}|${row.user_name}`;
+    const key = `${row.log_date}|${row.hour_label}|${row.user_name}`;
 
     if (!grouped[key]) {
       grouped[key] = {
@@ -220,43 +202,21 @@ async function downloadCSV() {
       };
     }
 
-    if (row.action === "인원1")
-      grouped[key].person1 += 1;
+    if (row.action === "인원1") grouped[key].person1 += 1;
+    if (row.action === "인원2") grouped[key].person2 += 2;
+    if (row.action === "인원3") grouped[key].person3 += 3;
+    if (row.action === "인원4") grouped[key].person4 += 4;
+    if (row.action === "인원5") grouped[key].person5 += 5;
 
-    if (row.action === "인원2")
-      grouped[key].person2 += 2;
-
-    if (row.action === "인원3")
-      grouped[key].person3 += 3;
-
-    if (row.action === "인원4")
-      grouped[key].person4 += 4;
-
-    if (row.action === "인원5")
-      grouped[key].person5 += 5;
-
-    if (row.action === "차감1")
-      grouped[key].minus1 += 1;
-
-    if (row.action === "차감2")
-      grouped[key].minus2 += 2;
-
-    if (row.action === "차감3")
-      grouped[key].minus3 += 3;
-
-    if (row.action === "차감4")
-      grouped[key].minus4 += 4;
-
-    if (row.action === "차감5")
-      grouped[key].minus5 += 5;
+    if (row.action === "차감1") grouped[key].minus1 += 1;
+    if (row.action === "차감2") grouped[key].minus2 += 2;
+    if (row.action === "차감3") grouped[key].minus3 += 3;
+    if (row.action === "차감4") grouped[key].minus4 += 4;
+    if (row.action === "차감5") grouped[key].minus5 += 5;
 
     if (row.action === "리셋") {
       grouped[key].resetCount += 1;
-
-      grouped[key].resetBeforeTotal +=
-        Number(
-          row.before_value || 0
-        );
+      grouped[key].resetBeforeTotal += Number(row.before_value || 0);
     }
   });
 
@@ -278,9 +238,7 @@ async function downloadCSV() {
     "리셋전카운트"
   ];
 
-  const rows = Object.values(
-    grouped
-  ).map((row) => [
+  const rows = Object.values(grouped).map((row) => [
     row.date,
     row.hour,
     row.user,
@@ -301,39 +259,20 @@ async function downloadCSV() {
   const csv = [header, ...rows]
     .map((row) =>
       row
-        .map(
-          (value) =>
-            `"${String(
-              value ?? ""
-            ).replaceAll('"', '""')}"`
-        )
+        .map((value) => `"${String(value ?? "").replaceAll('"', '""')}"`)
         .join(",")
     )
     .join("\n");
 
-  const blob = new Blob(
-    ["\uFEFF" + csv],
-    {
-      type:
-        "text/csv;charset=utf-8;"
-    }
-  );
+  const blob = new Blob(["\uFEFF" + csv], {
+    type: "text/csv;charset=utf-8;"
+  });
 
-  const url =
-    URL.createObjectURL(blob);
+  const url = URL.createObjectURL(blob);
 
-  const a =
-    document.createElement("a");
-
+  const a = document.createElement("a");
   a.href = url;
-
-  a.download =
-    `카운터1_사용자별_집계_${
-      new Date()
-        .toISOString()
-        .slice(0, 10)
-    }.csv`;
-
+  a.download = `카운터1_사용자별_집계_${new Date().toISOString().slice(0, 10)}.csv`;
   a.click();
 
   URL.revokeObjectURL(url);
